@@ -24,6 +24,7 @@ cluster.name: my-elasticsearch-cluster
 #
 node.name: node-1
 node.master: true
+node.data: false
 #
 # Add custom attributes to the node:
 #
@@ -72,7 +73,7 @@ http.port: 9200
 #
 # Prevent the "split brain" by configuring the majority of nodes (total number of master-eligible nodes / 2 + 1):
 #
-discovery.zen.minimum_master_nodes: 2
+#discovery.zen.minimum_master_nodes: 2
 #
 # For more information, consult the zen discovery module documentation.
 #

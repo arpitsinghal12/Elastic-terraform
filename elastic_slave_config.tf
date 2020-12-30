@@ -1,3 +1,5 @@
+data "template_file" "elasticsearch_slave" {
+template = <<EOT
 # ======================== Elasticsearch Configuration =========================
 #
 # NOTE: Elasticsearch comes with reasonable defaults for most settings.
@@ -20,9 +22,9 @@ cluster.name: my-elasticsearch-cluster
 #
 # Use a descriptive name for the node:
 #
-node.name: node-1
-node.master: true
-node.data: false
+node.name: node-2
+node.master: false
+node.data: true
 #
 # Add custom attributes to the node:
 #
@@ -67,7 +69,7 @@ http.port: 9200
 # Pass an initial list of hosts to perform discovery when new node is started:
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 #
-#discovery.zen.ping.unicast.hosts: [3.137.164.63, 3.137.219.187]
+discovery.zen.ping.unicast.hosts: [${module.ec2_cluster_master.private_ip[0]}]
 #
 # Prevent the "split brain" by configuring the majority of nodes (total number of master-eligible nodes / 2 + 1):
 #
@@ -88,5 +90,18 @@ http.port: 9200
 # Require explicit names when deleting indices:
 #
 #action.destructive_requires_name: true
+
+EOT
+}
+
+resource "null_resource" "elasticsearch_slave" {
+	triggers = {
+		template = data.template_file.elasticsearch_slave.rendered		
+		}
+
+	provisioner "local-exec"{
+		command = "echo '${data.template_file.elasticsearch_slave.rendered}' > elastic-ansible/roles/elastic-search-slave/files/elasticsearch.yml"
+		}
+}
 
 
