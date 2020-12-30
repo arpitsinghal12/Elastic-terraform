@@ -17,6 +17,6 @@ cd Elastic-terraform
 terraform apply -var-file=./variables/elastic.tfvars
 ```
 
-# I have used the Terraform to provision the AWS infrastructure of 1 node as a master 2 node as worker. I used the terraform template module to populate the inventory,nginx.conf,elasticsearh confi into the ansible folder. And then use the Terraform provision method to run the ansible script. I have managed to enable the password-protected authentication to the elasticsearch web-server.
+### I have used the Terraform to provision the AWS infrastructure of 1 node as a master 2 node as worker. I used the terraform template module to populate the inventory,nginx.conf,elasticsearh confi into the ansible folder. And then use the Terraform provision method to run the ansible script. I have managed to enable the password-protected authentication to the elasticsearch web-server.
 
 
