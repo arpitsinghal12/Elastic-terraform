@@ -1,0 +1,37 @@
+---
+- name: install the nginx.
+  apt:
+    pkg: 
+     - nginx
+     - apache2-utils
+     - python3-pip 
+    update_cache: yes
+
+- name: download the python library.
+  pip:
+    name: passlib
+
+- name: create the htpassword file for the authentcating access to nginx proxy server of elasticsearch
+  htpasswd:
+    path: /etc/nginx/htpasswd.users
+    name: elasticadmin
+    password: 'DFA@#$$'
+    owner: root
+    group: root
+    mode: 0640
+
+- name: copy the elasticsearch file to server.
+  copy:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+    mode: 0644
+    owner: root
+    group: root
+
+
+- name: restart the nginx service.
+  service:
+    name: nginx
+    state: restarted
+    enabled: yes
+

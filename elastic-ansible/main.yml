@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+
+  - name: Pause for 1 minutes to build app cache
+    pause:
+      minutes: 1
+
+- hosts: elasticsearch
+  gather_facts: yes
+  become: yes
+  roles: 
+    - elastic-search
+
+- hosts: elasticsearch_slave
+  gather_facts: yes
+  become: yes
+  roles: 
+    - elastic-search-slave

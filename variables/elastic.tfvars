@@ -1,0 +1,15 @@
+name_master = "elastic_master"
+name_slave = "elastic_slave"
+instance_count_master = 1 
+instance_count_slave = 2
+ami_master = "ami-0e82959d4ed12de3f"
+ami_slave = "ami-0e82959d4ed12de3f"
+#ami_slave = "ami-0d6093b7b8053306c"
+instance_type = "t2.medium"
+key_name = "bastion"
+vpc_security_group_ids = ["sg-056ddde7adbd69310"]
+vpc_id = "vpc-250a484c"
+subnet_id = "subnet-2ed28147"
+region = "us-east-2"
+size = 60
+iam_instance_profile = "arn:aws:iam::036265431645:instance-profile/aws_ec2_role"
