@@ -12,8 +12,22 @@ module "elastic_sg" {
 
   ingress_with_cidr_blocks = [
     {
-      from_port   = 20
-      to_port     = 50000
+	from_port = 22
+	to_port   = 22
+	protocol  = "tcp"
+	description = "ssh-config"
+	cidr_blocks = "0.0.0.0/0"
+    },
+    {
+      from_port   = 9200
+      to_port     = 9300
+      protocol    = "tcp"
+      description = "User-service ports"
+      cidr_blocks = "172.31.0.0/16"
+    },
+    {
+      from_port   = 80
+      to_port     = 80
       protocol    = "tcp"
       description = "User-service ports"
       cidr_blocks = "0.0.0.0/0"
@@ -39,7 +53,7 @@ module "ec2_cluster_master" {
   instance_type          = var.instance_type 
   key_name               = var.key_name 
   monitoring             = true
-  vpc_security_group_ids = ["sg-056ddde7adbd69310","${module.elastic_sg.this_security_group_id}"]
+  vpc_security_group_ids = ["${module.elastic_sg.this_security_group_id}"]
   subnet_id              = var.subnet_id
 
 tags = {
@@ -57,7 +71,7 @@ module "ec2_cluster_slave" {
   instance_type          = var.instance_type 
   key_name               = var.key_name 
   monitoring             = true
-  vpc_security_group_ids = ["sg-056ddde7adbd69310","${module.elastic_sg.this_security_group_id}"]
+  vpc_security_group_ids = ["${module.elastic_sg.this_security_group_id}"]
   subnet_id              = var.subnet_id
 
 tags = {

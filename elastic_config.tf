@@ -22,7 +22,7 @@ cluster.name: my-elasticsearch-cluster
 #
 # Use a descriptive name for the node:
 #
-#node.name: node-1
+node.name: node-1
 node.master: true
 #
 # Add custom attributes to the node:
@@ -68,7 +68,7 @@ http.port: 9200
 # Pass an initial list of hosts to perform discovery when new node is started:
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 #
-discovery.zen.ping.unicast.hosts: [${module.ec2_cluster_slave.public_ip[0]}, ${module.ec2_cluster_slave.public_ip[1]}]
+#discovery.zen.ping.unicast.hosts: [${module.ec2_cluster_slave.public_ip[0]}, ${module.ec2_cluster_slave.public_ip[1]}]
 #
 # Prevent the "split brain" by configuring the majority of nodes (total number of master-eligible nodes / 2 + 1):
 #

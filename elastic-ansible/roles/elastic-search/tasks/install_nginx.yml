@@ -18,7 +18,7 @@
     password: 'DFA@#$$'
     owner: root
     group: root
-    mode: 0640
+    mode: 0644
 
 - name: copy the elasticsearch file to server.
   copy:
