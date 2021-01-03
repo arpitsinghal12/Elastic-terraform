@@ -1,2 +1,10 @@
 ---
-# vars file for elastic-search
+elasticsearch_package_name: "elasticsearch"
+java_package: "default-jre"
+elasticsearch_key_url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+transport_package: "apt-transport-https"
+elasticsearch_repo_url: "https://artifacts.elastic.co/packages/6.x/apt"
+elasticsearch_username: "elasticadmin"
+elasticsearch_password: "Elasticadmin@12346789"
+python_library: "passlib"
+

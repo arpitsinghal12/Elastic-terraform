@@ -1,29 +1,29 @@
 ---
 - name: install java for the elasticsearch purpose.
   apt:
-    name: default-jre
+    name: "{{ java_package}}" 
     state: latest
     update_cache: yes
 
 
 - name: Add an Apt signing key, uses whichever key is at the URL
   apt_key:
-    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    url: "{{ elasticsearch_key_url }}" 
     state: present
 
 - name: Add the transport-https-package.
   apt:
-    name: apt-transport-https
+    name: "{{ transport_package }}" 
     update_cache: yes
 
 - name: Add specified repository into sources list
   apt_repository:
-    repo: deb https://artifacts.elastic.co/packages/6.x/apt stable main
+    repo: deb "{{ elasticsearch_repo_url }}"  stable main
     state: present
 
 - name: Install the elastic search over the cluster.
   apt:
-    name: elasticsearch
+    name: "{{ elasticsearch_package_name }}" 
     update_cache: yes
 
 - name: copy the elasticsearch file to server.

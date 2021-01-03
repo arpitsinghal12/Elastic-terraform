@@ -9,16 +9,16 @@
 
 - name: download the python library.
   pip:
-    name: passlib
+    name: "{{ python_library }}" #passlib
 
 - name: create the htpassword file for the authentcating access to nginx proxy server of elasticsearch
   htpasswd:
     path: /etc/nginx/htpasswd.users
-    name: elasticadmin
-    password: 'DFA@#$$'
+    name: "{{ elasticsearch_username }}"
+    password: "{{ elasticsearch_password }}"
     owner: root
     group: root
-    mode: 0640
+    mode: 0644
 
 - name: copy the elasticsearch file to server.
   copy:
