@@ -31,10 +31,6 @@ variable "ami_master" {
   type        = string
 }
 
-variable "iam_instance_profile" {
-  description = "ID of IAM for instances"
-  type        = string
-}
 
 variable "ami_slave" {
   description = "ID of AMI to use for the instance"
